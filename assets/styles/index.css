@@ -1,0 +1,202 @@
+/* Estilo geral do corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2E3B4E; /* Fundo cinza-azulado futurístico */
+    color: #F0ECE2; /* Cor de texto clara */
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Estilo para o cabeçalho */
+header {
+    background-color: #00457C; /* Azul escuro inspirado no uniforme de Fry */
+    color: #FFFFFF;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Container para o layout principal */
+.container {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Estilo para a barra lateral */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #00457C; /* Azul escuro */
+    color: #FFFFFF;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 60px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar button {
+    background-color: #D35400; /* Laranja vibrante como o cabelo do Fry */
+    color: #FFFFFF;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+    background-color: #E67E22; /* Laranja mais claro */
+}
+
+/* Estilo para o conteúdo principal */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+    flex-grow: 1;
+    margin-top: 20px;
+}
+
+/* Estilo para seções ocultas */
+.hidden {
+    display: none;
+}
+
+/* Estilo para as seções visíveis */
+.section {
+    background: #F5F5F5; /* Fundo claro para contraste */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Estilo dos labels e inputs */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #B0C4DE; /* Cinza-azulado para inputs */
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    text-transform: uppercase;
+}
+
+button {
+    background-color: #00457C;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #006BA1; /* Azul um pouco mais claro */
+}
+
+/* Estilo das tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+th {
+    background-color: #00457C;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #D3D3D3; /* Cinza mais claro */
+}
+
+/* Estilo para o modal de prioridade */
+#priorityModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#priorityModal > div {
+    background: #F5F5F5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#priorityModal label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#priorityModal select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #B0C4DE;
+}
+
+#priorityModal button {
+    background-color: #27AE60; /* Verde vivo como o de algumas cenas tecnológicas */
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#priorityModal button:hover {
+    background-color: #229954; /* Verde mais escuro */
+}
+
+#priorityModal #cancelPriority {
+    background-color: #E74C3C; /* Vermelho como alerta */
+}
+
+#priorityModal #cancelPriority:hover {
+    background-color: #C0392B; /* Vermelho mais escuro */
+}
