@@ -1,0 +1,25 @@
+{
+  "name": "node-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bull": "^4.16.1",
+    "collections": "^5.1.13",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "firebase-admin": "^12.4.0",
+    "firebase-tools": "^13.16.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "ws": "^8.18.0"
+  }
+}

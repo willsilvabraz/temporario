@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação da API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #e9e9e9;
+            padding: 10px;
+            border-left: 4px solid #333;
+            overflow-x: auto;
+        }
+        .endpoint {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .endpoint:first-of-type {
+            border-top: none;
+        }
+        .endpoint h2 {
+            margin-top: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .buttons {
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .buttons button.active {
+            background-color: #555;
+        }
+        #notification {
+            background-color: #ffeb3b;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Documentação da API</h1>
+
+        <h2>Visão Geral</h2>
+        <p>Esta API permite a gestão de pacientes e filas usando o Firebase Realtime Database. Ela fornece endpoints para realizar operações CRUD (Criar, Ler, Atualizar e Excluir) para as coleções de <code>pacientes</code> e <code>fila</code>. Além disso, a API suporta comunicação em tempo real usando WebSocket.</p>
+        
+        <h2>Servidor</h2>
+        <p><strong>Base URL</strong>: <code>http://localhost:8080</code></p>
+
+        <div class="buttons">
+            <button id="pacientesBtn" class="active" onclick="showSection('pacientes')">Pacientes</button>
+            <button id="filaBtn" onclick="showSection('fila')">Fila</button>
+        </div>
+
+        <div id="pacientes" class="endpoint">
+            <h2>1. Pacientes</h2>
+
+            <h3>Criar Paciente</h3>
+            <p><strong>Método</strong>: <code>POST</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/cadastrar</code></p>
+            <p><strong>Descrição</strong>: Adiciona um novo paciente.</p>
+            <p><strong>Corpo da Requisição</strong>:</p>
+            <pre><code>{
+    "nome": "Nome do Paciente",
+    "dataNasc": "YYYY-MM-DD",
+    "cpf": "12345678900"
+}</code></pre>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "message": "Cadastrado realizado com sucesso."
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Listar Pacientes</h3>
+            <p><strong>Método</strong>: <code>GET</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/listar</code></p>
+            <p><strong>Descrição</strong>: Lista todos os pacientes.</p>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>[
+    {
+        "id": "ID",
+        "nome": "Nome do Paciente",
+        "dataNasc": "YYYY-MM-DD",
+        "cpf": "12345678900"
+    }
+]</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Obter Paciente</h3>
+            <p><strong>Método</strong>: <code>GET</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/obter/:id</code></p>
+            <p><strong>Descrição</strong>: Obtém um paciente específico pelo ID.</p>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "id": "ID",
+    "nome": "Nome do Paciente",
+    "dataNasc": "YYYY-MM-DD",
+    "cpf": "12345678900"
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Atualizar Paciente</h3>
+            <p><strong>Método</strong>: <code>PUT</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/atualizar</code></p>
+            <p><strong>Descrição</strong>: Atualiza os dados de um paciente existente.</p>
+            <p><strong>Query String</strong>:</p>
+            <pre><code>id=ID</code></pre>
+            <p><strong>Corpo da Requisição</strong>:</p>
+            <pre><code>{
+    "nome": "Novo Nome",
+    "dataNasc": "YYYY-MM-DD",
+    "cpf": "12345678900"
+}</code></pre>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "message": "Atualização realizada com sucesso."
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Deletar Paciente</h3>
+            <p><strong>Método</strong>: <code>DELETE</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/deletar/:id</code></p>
+            <p><strong>Descrição</strong>: Remove um paciente pelo ID.</p>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "message": "Remoção concluída com sucesso."
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Buscar Paciente por Nome</h3>
+            <p><strong>Método</strong>: <code>GET</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/buscar/:nome</code></p>
+            <p><strong>Descrição</strong>: Busca pacientes pelo nome.</p>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>[
+    {
+        "id": "ID",
+        "nome": "Nome do Paciente",
+        "dataNasc": "YYYY-MM-DD",
+        "cpf": "12345678900"
+    }
+]</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Obter Tamanho da Coleção de Pacientes</h3>
+            <p><strong>Método</strong>: <code>GET</code></p>
+            <p><strong>Endpoint</strong>: <code>/pacientes/tamanho</code></p>
+            <p><strong>Descrição</strong>: Obtém o número total de pacientes.</p>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "tamanho": número
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+        </div>
+
+        <div id="fila" class="endpoint hidden">
+            <h2>2. Fila</h2>
+
+            <h3>Criar Fila</h3>
+            <p><strong>Método</strong>: <code>POST</code></p>
+            <p><strong>Endpoint</strong>: <code>/fila/adicionar</code></p>
+            <p><strong>Descrição</strong>: Adiciona um novo paciente à fila.</p>
+            <p><strong>Corpo da Requisição</strong>:</p>
+            <pre><code>{
+    "idPaciente": "ID do Paciente",
+    "prioridade": número
+}</code></pre>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "message": "Paciente adicionado à fila."
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+
+            <h3>Obter Próximo Paciente na Fila</h3>
+            <p><strong>Método</strong>: <code>GET</code></p>
+            <p><strong>Endpoint</strong>: <code>/fila/atual/:status</code></p>
+            <p><strong>Descrição</strong>: Obtém o próximo paciente na fila com base no status fornecido.</p>
+            <p><strong>Resposta Sucesso</strong>:</p>
+            <pre><code>{
+    "id": "ID",
+    "nome": "Nome do Paciente",
+    "status": "Status",
+    "horaChegada": "Data e Hora",
+    "prioridade": número
+}</code></pre>
+            <p><strong>Resposta Erro</strong>:</p>
+            <pre><code>{
+    "message": "Mensagem de erro"
+}</code></pre>
+        </div>
+
+        <div class="endpoint">
+            <h2>WebSocket</h2>
+
+            <h3>Endpoint</h3>
+            <p><strong>Endpoint</strong>: <code>ws://localhost:8080/ws</code></p>
+            <p><strong>Descrição</strong>: Conecta-se ao servidor WebSocket para receber atualizações em tempo real sobre pacientes e filas.</p>
+
+            <div id="notification">Notificação: </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar seções específicas
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.endpoint');
+            sections.forEach(section => section.classList.add('hidden'));
+
+            const buttons = document.querySelectorAll('.buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId + 'Btn').classList.add('active');
+        }
+
+        // WebSocket para notificações
+        const notificationDiv = document.getElementById('notification');
+        const socket = new WebSocket('ws://localhost:8080/ws');
+
+        socket.onopen = function() {
+            notificationDiv.style.display = 'block';
+            notificationDiv.textContent = 'Conexão WebSocket estabelecida.';
+        };
+
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            notificationDiv.textContent = `Atualização: ${data.message}`;
+        };
+
+        socket.onerror = function() {
+            notificationDiv.style.display = 'block';
+            notificationDiv.textContent = 'Erro na conexão WebSocket.';
+        };
+
+        socket.onclose = function() {
+            notificationDiv.style.display = 'block';
+            notificationDiv.textContent = 'Conexão WebSocket encerrada.';
+        };
+    </script>
+</body>
+</html>
