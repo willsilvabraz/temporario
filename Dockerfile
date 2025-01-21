@@ -4,6 +4,8 @@ WORKDIR /site/api
 COPY Api-Tcc/package.json Api-Tcc/package-lock.json ./
 RUN npm install
 COPY Api-Tcc .
+RUN Npm start
+EXPOSE 8080
 
 
 WORKDIR /site/front
